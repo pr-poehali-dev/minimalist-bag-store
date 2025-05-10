@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, Menu, X, Search, User } from "lucide-react";
 import { Button } from "./ui/button";
+import Cart from "./Cart";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const navigate = useNavigate();
 
   return (
@@ -70,14 +72,21 @@ const Navbar = () => {
           >
             <User className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="icon" className="relative">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative"
+            onClick={() => setIsCartOpen(true)}
+          >
             <ShoppingBag className="h-5 w-5" />
             <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
-              0
+              2
             </span>
           </Button>
         </div>
       </div>
+
+      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </header>
   );
 };
